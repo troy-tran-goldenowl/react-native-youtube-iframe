@@ -222,10 +222,12 @@ const YoutubeIframe = (props, ref) => {
             : ''
         }
         onShouldStartLoadWithRequest={request => {
-          return request?.mainDocumentURL?.startsWith(
-            baseUrlOverride || defaultBaseUrl,
-          );
-          // return request.mainDocumentURL === 'about:blank';
+          if (request) {
+            return request.mainDocumentURL.startsWith(
+              baseUrlOverride || defaultBaseUrl,
+            );
+          }
+          return false;
         }}
         bounces={false}
         // props above this are override-able
